@@ -213,8 +213,14 @@
             box-shadow: var(--shadow-md);
         }
 
-        #sidebar.closed {
+        /* Estado recolhido (desktop) */
+        #sidebar.collapsed {
             transform: translateX(-100%);
+        }
+
+        /* Estado aberto (mobile drawer) */
+        #sidebar.open {
+            transform: translateX(0);
         }
 
         /* Logo */
@@ -397,7 +403,6 @@
         }
 
         #hamburger {
-            display: none;
             background: none;
             border: none;
             color: var(--text-secondary);
@@ -407,6 +412,9 @@
             border-radius: var(--radius-sm);
             transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         #hamburger:hover {
             background: var(--bg-tertiary);
@@ -624,6 +632,11 @@
             position: relative;
         }
 
+        /* Quando a sidebar está recolhida (desktop) */
+        #main.expanded {
+            margin-left: 0;
+        }
+
         #main::before {
             content: '';
             position: absolute;
@@ -633,10 +646,6 @@
                 radial-gradient(circle at 80% 70%, var(--accent-gold-dim) 0%, transparent 50%);
             opacity: 0.15;
             z-index: 0;
-        }
-
-        #main.expanded {
-            margin-left: 0;
         }
 
         #content {
@@ -978,20 +987,25 @@
                 --header-height: 58px;
             }
 
-            #hamburger {
-                display: flex;
-            }
-
+            /* Em mobile a sidebar fica oculta por padrão (transform) */
             #sidebar {
                 transform: translateX(-100%);
                 box-shadow: var(--shadow-lg);
                 border-right: none;
+                transition: transform var(--transition-speed) var(--transition-bounce);
             }
             #sidebar.open {
                 transform: translateX(0);
             }
+            /* A classe collapsed não deve ter efeito em mobile, pois a sidebar já está fora */
+            #sidebar.collapsed {
+                transform: translateX(-100%);
+            }
 
             #main {
+                margin-left: 0;
+            }
+            #main.expanded {
                 margin-left: 0;
             }
 
@@ -1158,8 +1172,8 @@
         <div id="main">
             <!-- HEADER -->
             <header id="header">
-                <!-- Hambúrguer -->
-                <button id="hamburger" aria-label="Abrir menu de navegação" title="Menu">
+                <!-- Botão toggle (hambúrguer / seta) -->
+                <button id="hamburger" aria-label="Alternar barra lateral" title="Alternar barra lateral">
                     <i class="fas fa-bars"></i>
                 </button>
 
@@ -1256,7 +1270,7 @@
     <input type="file" id="fileInput" accept=".json" style="display:none">
 
     <!-- ============================================================
-    JAVASCRIPT — HUB PRINCIPAL (atualizado)
+    JAVASCRIPT — HUB PRINCIPAL (atualizado com sistema de expandir/recolher)
     ============================================================ -->
     <script>
         (function() {
@@ -1318,7 +1332,7 @@
                 settings: { theme: CONFIG.defaultTheme },
                 isSaving: false,
                 saveTimeout: null,
-                sidebarOpen: false,
+                sidebarOpen: true, // true = expandida/aberta, false = recolhida/fechada
                 isMobile: window.innerWidth <= 768,
                 pageCache: {}
             };
@@ -1719,7 +1733,7 @@
             };
 
             // ============================================================
-            // SIDEBAR
+            // SIDEBAR — com sistema de expandir/recolher
             // ============================================================
             const Sidebar = {
                 _activeId: null,
@@ -1769,27 +1783,93 @@
                 navigate(pageId) {
                     if (pageId === this._activeId && dom.pageContainer.dataset.page === pageId) return;
                     PageLoader.load(pageId);
-                    if (state.isMobile) this.close();
+                    // Em mobile, fechar o drawer ao navegar
+                    if (state.isMobile && state.sidebarOpen) {
+                        this.close();
+                    }
                 },
 
-                open() {
+                // Abrir/expandir em desktop
+                openDesktop() {
+                    dom.sidebar.classList.remove('collapsed');
+                    dom.main.classList.remove('expanded');
+                    state.sidebarOpen = true;
+                    this._updateButtonIcon();
+                },
+
+                // Recolher em desktop
+                closeDesktop() {
+                    dom.sidebar.classList.add('collapsed');
+                    dom.main.classList.add('expanded');
+                    state.sidebarOpen = false;
+                    this._updateButtonIcon();
+                },
+
+                // Abrir drawer em mobile
+                openMobile() {
                     dom.sidebar.classList.add('open');
                     dom.sidebarOverlay.classList.add('open');
                     state.sidebarOpen = true;
+                    this._updateButtonIcon();
                 },
 
-                close() {
+                // Fechar drawer em mobile
+                closeMobile() {
                     dom.sidebar.classList.remove('open');
                     dom.sidebarOverlay.classList.remove('open');
                     state.sidebarOpen = false;
+                    this._updateButtonIcon();
                 },
 
+                // Alternar com base no dispositivo
                 toggle() {
-                    state.sidebarOpen ? this.close() : this.open();
+                    if (state.isMobile) {
+                        state.sidebarOpen ? this.closeMobile() : this.openMobile();
+                    } else {
+                        state.sidebarOpen ? this.closeDesktop() : this.openDesktop();
+                    }
+                },
+
+                // Inicializar estado da sidebar conforme dispositivo
+                initState() {
+                    if (state.isMobile) {
+                        // Em mobile, começa fechada
+                        dom.sidebar.classList.remove('open');
+                        dom.sidebarOverlay.classList.remove('open');
+                        state.sidebarOpen = false;
+                        // Garantir que não haja classes de desktop
+                        dom.sidebar.classList.remove('collapsed');
+                        dom.main.classList.remove('expanded');
+                    } else {
+                        // Em desktop, começa expandida
+                        dom.sidebar.classList.remove('collapsed');
+                        dom.main.classList.remove('expanded');
+                        state.sidebarOpen = true;
+                        // Garantir que não haja classes de mobile
+                        dom.sidebar.classList.remove('open');
+                        dom.sidebarOverlay.classList.remove('open');
+                    }
+                    this._updateButtonIcon();
+                },
+
+                // Atualizar ícone e tooltip do botão
+                _updateButtonIcon() {
+                    const icon = dom.hamburger.querySelector('i');
+                    if (!icon) return;
+                    if (state.isMobile) {
+                        // Mobile: ícone de hambúrguer ou "X" quando aberto
+                        icon.className = state.sidebarOpen ? 'fas fa-times' : 'fas fa-bars';
+                        dom.hamburger.title = state.sidebarOpen ? 'Fechar menu' : 'Abrir menu';
+                    } else {
+                        // Desktop: seta dupla
+                        icon.className = state.sidebarOpen ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
+                        dom.hamburger.title = state.sidebarOpen ? 'Recolher sidebar' : 'Expandir sidebar';
+                    }
                 },
 
                 init() {
                     this.render();
+                    this.initState();
                     const initialPage = window.location.hash.replace('#', '') || CONFIG.defaultPage;
                     this.setActive(initialPage);
                     PageLoader.load(initialPage);
@@ -1797,7 +1877,7 @@
             };
 
             // ============================================================
-            // HUB API — EXPOSIÇÃO GLOBAL (mesmo, com nome Overview)
+            // HUB API — EXPOSIÇÃO GLOBAL (mesmo)
             // ============================================================
             const HubAPI = {
                 getData(key) {
@@ -2050,6 +2130,7 @@
             // EVENTOS DO HEADER
             // ============================================================
             function initHeaderEvents() {
+                // Botão toggle da sidebar
                 dom.hamburger.addEventListener('click', () => Sidebar.toggle());
 
                 dom.btnExport.addEventListener('click', () => HubAPI.exportProject());
@@ -2091,7 +2172,7 @@
                     }
                 });
 
-                dom.sidebarOverlay.addEventListener('click', () => Sidebar.close());
+                dom.sidebarOverlay.addEventListener('click', () => Sidebar.closeMobile());
             }
 
             // ============================================================
@@ -2099,13 +2180,25 @@
             // ============================================================
             function handleResize() {
                 const mobile = window.innerWidth <= 768;
+                const wasMobile = state.isMobile;
                 state.isMobile = mobile;
-                if (!mobile) {
-                    Sidebar.close();
-                    dom.sidebar.classList.remove('closed');
+
+                if (mobile && !wasMobile) {
+                    // Mudou de desktop para mobile: fechar sidebar (drawer) e resetar estados
+                    dom.sidebar.classList.remove('collapsed');
                     dom.main.classList.remove('expanded');
-                } else {
-                    dom.sidebar.classList.remove('closed');
+                    dom.sidebar.classList.remove('open');
+                    dom.sidebarOverlay.classList.remove('open');
+                    state.sidebarOpen = false;
+                    Sidebar._updateButtonIcon();
+                } else if (!mobile && wasMobile) {
+                    // Mudou de mobile para desktop: abrir sidebar (expandida)
+                    dom.sidebar.classList.remove('open');
+                    dom.sidebarOverlay.classList.remove('open');
+                    dom.sidebar.classList.remove('collapsed');
+                    dom.main.classList.remove('expanded');
+                    state.sidebarOpen = true;
+                    Sidebar._updateButtonIcon();
                 }
             }
 
