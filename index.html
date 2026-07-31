@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Dev Hub · Overview</title>
+
+    <!-- Google Fonts: Inter (pesos extras) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* ============================================================
+               RESET & BASE — design elevado
+               ============================================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* --- Paleta escura refinada --- */
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #10101a;
+            --bg-tertiary: #181825;
+            --bg-elevated: #22223a;
+            --bg-sidebar: #0c0c14;
+            --bg-card: #14141f;
+            --bg-glass: rgba(255, 255, 255, 0.03);
+
+            --text-primary: #eaeef5;
+            --text-secondary: #a8b2d0;
+            --text-muted: #5e6a8a;
+            --text-inverse: #0a0a0f;
+
+            --border-subtle: #26263a;
+            --border-medium: #3a3a56;
+            --border-glow: rgba(0, 212, 255, 0.2);
+
+            --accent-cyan: #00d4ff;
+            --accent-cyan-dim: rgba(0, 212, 255, 0.10);
+            --accent-cyan-glow: rgba(0, 212, 255, 0.25);
+            --accent-gold: #d4a853;
+            --accent-gold-dim: rgba(212, 168, 83, 0.10);
+            --accent-gold-glow: rgba(212, 168, 83, 0.20);
+            --accent-red: #ff5e7a;
+            --accent-green: #4cd9a8;
+            --accent-orange: #f0a84c;
+
+            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 8px 40px rgba(0, 0, 0, 0.6);
+            --shadow-lg: 0 16px 72px rgba(0, 0, 0, 0.7);
+            --shadow-glow: 0 0 40px rgba(0, 212, 255, 0.05);
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-xl: 24px;
+
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --sidebar-width: 270px;
+            --header-height: 64px;
+            --transition-speed: 0.28s;
+            --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-blur: 16px;
+        }
+
+        /* --- Tema: Dark Blue --- */
+        [data-theme="dark-blue"] {
+            --bg-primary: #060b18;
+            --bg-secondary: #0a1228;
+            --bg-tertiary: #101e3a;
+            --bg-elevated: #182a4a;
+            --bg-sidebar: #040812;
+            --bg-card: #0c1a32;
+            --border-subtle: #1a2e52;
+            --border-medium: #2a426a;
+            --accent-cyan: #4a9eff;
+            --accent-cyan-dim: rgba(74, 158, 255, 0.10);
+            --accent-cyan-glow: rgba(74, 158, 255, 0.20);
+            --text-primary: #e4eaf5;
+            --text-secondary: #8aa0c8;
+            --text-muted: #4a5e7a;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.04);
+        }
+
+        /* --- Tema: Cyber --- */
+        [data-theme="cyber"] {
+            --bg-primary: #08080f;
+            --bg-secondary: #0d0d1a;
+            --bg-tertiary: #141428;
+            --bg-elevated: #1c1c38;
+            --bg-sidebar: #06060c;
+            --bg-card: #10101f;
+            --border-subtle: #28284a;
+            --border-medium: #3a3a62;
+            --accent-cyan: #00f0ff;
+            --accent-cyan-dim: rgba(0, 240, 255, 0.08);
+            --accent-cyan-glow: rgba(0, 240, 255, 0.18);
+            --accent-gold: #ffd866;
+            --accent-gold-dim: rgba(255, 216, 102, 0.08);
+            --accent-gold-glow: rgba(255, 216, 102, 0.15);
+            --text-primary: #edeffa;
+            --text-secondary: #99aadd;
+            --text-muted: #4a4f7a;
+            --glass-bg: rgba(0, 240, 255, 0.03);
+            --glass-border: rgba(0, 240, 255, 0.08);
+            --shadow-sm: 0 2px 16px rgba(0, 0, 0, 0.7);
+            --shadow-md: 0 8px 48px rgba(0, 0, 0, 0.8);
+            --shadow-lg: 0 16px 80px rgba(0, 0, 0, 0.9);
+            --shadow-glow: 0 0 60px rgba(0, 240, 255, 0.06);
+        }
+
+        /* --- Tema: Glass --- */
+        [data-theme="glass"] {
+            --bg-primary: rgba(10, 10, 20, 0.65);
+            --bg-secondary: rgba(16, 16, 30, 0.55);
+            --bg-tertiary: rgba(26, 26, 42, 0.45);
+            --bg-elevated: rgba(34, 34, 54, 0.50);
+            --bg-sidebar: rgba(8, 8, 18, 0.70);
+            --bg-card: rgba(20, 20, 36, 0.45);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-medium: rgba(255, 255, 255, 0.14);
+            --accent-cyan: #72d4ff;
+            --accent-cyan-dim: rgba(114, 212, 255, 0.08);
+            --accent-cyan-glow: rgba(114, 212, 255, 0.15);
+            --accent-gold: #e8c86a;
+            --accent-gold-dim: rgba(232, 200, 106, 0.08);
+            --accent-gold-glow: rgba(232, 200, 106, 0.12);
+            --text-primary: #f0f0f8;
+            --text-secondary: #b0b8d0;
+            --text-muted: #6a728a;
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.10);
+            --shadow-sm: 0 2px 20px rgba(0, 0, 0, 0.25);
+            --shadow-md: 0 8px 48px rgba(0, 0, 0, 0.30);
+            --shadow-lg: 0 16px 80px rgba(0, 0, 0, 0.35);
+            --shadow-glow: 0 0 60px rgba(114, 212, 255, 0.04);
+        }
+
+        /* --- Aplicação global --- */
+        html,
+        body {
+            height: 100%;
+            font-family: var(--font);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-medium);
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* ============================================================
+                   LAYOUT GERAL
+                   ============================================================ */
+        #app {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background: var(--bg-primary);
+            transition: background var(--transition-speed) ease;
+            position: relative;
+        }
+
+        /* ============================================================
+                   SIDEBAR — vidro com brilho
+                   ============================================================ */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-right: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            transition: transform var(--transition-speed) var(--transition-bounce),
+                background var(--transition-speed) ease,
+                border-color var(--transition-speed) ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        #sidebar.closed {
+            transform: translateX(-100%);
+        }
+
+        /* Logo */
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 22px 16px 22px;
+            border-bottom: 1px solid var(--glass-border);
+            flex-shrink: 0;
+            background: var(--glass-bg);
+        }
+        .sidebar-logo .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #0b0b0e;
+            font-weight: 800;
+            flex-shrink: 0;
+            box-shadow: 0 0 24px var(--accent-cyan-glow);
+        }
+        .sidebar-logo .logo-text {
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .sidebar-logo .logo-badge {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--accent-cyan);
+            background: var(--accent-cyan-dim);
+            padding: 3px 10px;
+            border-radius: 30px;
+            margin-left: auto;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Navegação */
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 16px 14px 24px 14px;
+        }
+
+        .sidebar-group {
+            margin-bottom: 22px;
+        }
+        .sidebar-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-group-title {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            padding: 6px 14px 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+        }
+        .sidebar-group-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--glass-border);
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 9px 14px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: background var(--transition-speed) ease,
+                color var(--transition-speed) ease,
+                transform 0.20s var(--transition-bounce),
+                box-shadow 0.2s ease;
+            color: var(--text-secondary);
+            text-decoration: none;
+            position: relative;
+            font-size: 13.5px;
+            font-weight: 450;
+            user-select: none;
+            border-left: 2px solid transparent;
+        }
+        .sidebar-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
+        .sidebar-item:active {
+            transform: scale(0.96);
+        }
+        .sidebar-item .icon {
+            width: 20px;
+            text-align: center;
+            font-size: 15px;
+            flex-shrink: 0;
+            color: var(--text-muted);
+            transition: color var(--transition-speed) ease, transform 0.2s ease;
+        }
+        .sidebar-item:hover .icon {
+            color: var(--accent-cyan);
+            transform: scale(1.05);
+        }
+        .sidebar-item .label {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sidebar-item .badge {
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 30px;
+            background: var(--accent-cyan-dim);
+            color: var(--accent-cyan);
+            border: 1px solid var(--glass-border);
+            flex-shrink: 0;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Estado ativo — brilho e destaque */
+        .sidebar-item.active {
+            background: var(--accent-cyan-dim);
+            color: var(--text-primary);
+            border-left-color: var(--accent-cyan);
+            box-shadow: inset 0 0 20px var(--accent-cyan-glow);
+            border-radius: var(--radius-sm);
+        }
+        .sidebar-item.active .icon {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 12px var(--accent-cyan-glow);
+        }
+        .sidebar-item.active .badge {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            border-color: var(--accent-cyan);
+        }
+
+        /* ============================================================
+                   HEADER — vidro elegante
+                   ============================================================ */
+        #header {
+            height: var(--header-height);
+            min-height: var(--header-height);
+            background: var(--bg-secondary);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 16px;
+            flex-shrink: 0;
+            transition: background var(--transition-speed) ease,
+                border-color var(--transition-speed) ease;
+            position: relative;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 6px 8px;
+            border-radius: var(--radius-sm);
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+            flex-shrink: 0;
+        }
+        #hamburger:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+            flex: 1;
+        }
+        .header-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            letter-spacing: -0.3px;
+        }
+        .header-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .header-breadcrumb .sep {
+            color: var(--border-medium);
+            font-size: 10px;
+        }
+        .header-breadcrumb .crumb {
+            color: var(--text-secondary);
+            transition: color var(--transition-speed) ease;
+        }
+        .header-breadcrumb .crumb:last-child {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .header-breadcrumb .crumb-link {
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color var(--transition-speed) ease;
+            text-decoration: none;
+        }
+        .header-breadcrumb .crumb-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .header-search {
+            display: flex;
+            align-items: center;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 0 16px;
+            gap: 10px;
+            transition: border-color var(--transition-speed) ease,
+                background var(--transition-speed) ease,
+                box-shadow 0.2s ease;
+            flex-shrink: 0;
+            min-width: 200px;
+            max-width: 280px;
+            backdrop-filter: blur(4px);
+        }
+        .header-search:focus-within {
+            border-color: var(--accent-cyan);
+            background: var(--bg-elevated);
+            box-shadow: 0 0 24px var(--accent-cyan-glow);
+        }
+        .header-search .search-icon {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        .header-search input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-family: var(--font);
+            font-size: 13px;
+            padding: 8px 0;
+            width: 100%;
+        }
+        .header-search input::placeholder {
+            color: var(--text-muted);
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 15px;
+            padding: 7px 10px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: background var(--transition-speed) ease,
+                color var(--transition-speed) ease,
+                transform 0.15s ease,
+                box-shadow 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .header-btn:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+        .header-btn:active {
+            transform: scale(0.90);
+        }
+        .header-btn .tooltip {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            padding: 5px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 500;
+            white-space: nowrap;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-sm);
+            pointer-events: none;
+            backdrop-filter: blur(8px);
+        }
+        .header-btn:hover .tooltip {
+            display: block;
+        }
+
+        .header-btn .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            border: 2px solid var(--bg-secondary);
+        }
+
+        .save-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+            padding: 0 10px;
+            flex-shrink: 0;
+            background: var(--glass-bg);
+            border-radius: 30px;
+            padding: 4px 14px 4px 10px;
+            border: 1px solid var(--glass-border);
+        }
+        .save-indicator .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 12px var(--accent-green);
+        }
+        .save-indicator .dot.saving {
+            background: var(--accent-orange);
+            box-shadow: 0 0 16px var(--accent-orange);
+            animation: pulse-dot 0.7s ease-in-out infinite alternate;
+        }
+        .save-indicator .dot.error {
+            background: var(--accent-red);
+            box-shadow: 0 0 16px var(--accent-red);
+        }
+
+        @keyframes pulse-dot {
+            0% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* ============================================================
+                   ÁREA PRINCIPAL — com gradiente sutil
+                   ============================================================ */
+        #main {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            transition: margin-left var(--transition-speed) var(--transition-bounce);
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        #main::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 20% 30%, var(--accent-cyan-dim) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, var(--accent-gold-dim) 0%, transparent 50%);
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        #main.expanded {
+            margin-left: 0;
+        }
+
+        #content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 32px 40px 48px 40px;
+            background: transparent;
+            position: relative;
+            z-index: 1;
+            transition: padding var(--transition-speed) ease;
+        }
+
+        /* Animações de entrada das páginas — mais fluidas */
+        .page-enter {
+            animation: pageFadeIn 0.40s var(--transition-bounce) forwards;
+        }
+
+        @keyframes pageFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(18px) scale(0.97);
+                filter: blur(2px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        /* Placeholder elegante */
+        .page-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            text-align: center;
+            gap: 20px;
+            color: var(--text-secondary);
+            background: var(--glass-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--glass-border);
+            padding: 48px 32px;
+            backdrop-filter: blur(8px);
+        }
+        .page-placeholder .icon-big {
+            font-size: 72px;
+            color: var(--text-muted);
+            opacity: 0.2;
+            transition: opacity 0.3s;
+        }
+        .page-placeholder h2 {
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+        .page-placeholder p {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 460px;
+            line-height: 1.7;
+        }
+        .page-placeholder .spinner {
+            width: 44px;
+            height: 44px;
+            border: 3px solid var(--glass-border);
+            border-top-color: var(--accent-cyan);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            box-shadow: 0 0 30px var(--accent-cyan-glow);
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ============================================================
+                   TOASTS (Notificações) — com vidro e brilho
+                   ============================================================ */
+        #toast-container {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 9999;
+            max-width: 420px;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .toast {
+            pointer-events: auto;
+            background: var(--bg-elevated);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            box-shadow: var(--shadow-md);
+            animation: toastSlide 0.40s var(--transition-bounce) forwards;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            border-left: 4px solid var(--text-muted);
+        }
+        .toast.removing {
+            opacity: 0;
+            transform: translateX(50px) scale(0.95);
+        }
+
+        .toast .toast-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .toast .toast-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .toast .toast-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .toast .toast-message {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            margin-top: 3px;
+            line-height: 1.5;
+        }
+        .toast .toast-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0 0 0 10px;
+            transition: color var(--transition-speed) ease, transform 0.2s;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .toast .toast-close:hover {
+            color: var(--text-primary);
+            transform: scale(1.1);
+        }
+
+        .toast.success {
+            border-left-color: var(--accent-green);
+        }
+        .toast.success .toast-icon {
+            color: var(--accent-green);
+        }
+        .toast.error {
+            border-left-color: var(--accent-red);
+        }
+        .toast.error .toast-icon {
+            color: var(--accent-red);
+        }
+        .toast.warning {
+            border-left-color: var(--accent-orange);
+        }
+        .toast.warning .toast-icon {
+            color: var(--accent-orange);
+        }
+        .toast.info {
+            border-left-color: var(--accent-cyan);
+        }
+        .toast.info .toast-icon {
+            color: var(--accent-cyan);
+        }
+
+        @keyframes toastSlide {
+            0% {
+                opacity: 0;
+                transform: translateX(50px) scale(0.92);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        /* ============================================================
+                   CONFIRMAÇÃO (Modal) — vidro premium
+                   ============================================================ */
+        #confirmation-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.25s ease;
+        }
+        #confirmation-overlay.open {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .confirmation-box {
+            background: var(--bg-elevated);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 36px 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+            animation: modalPop 0.35s var(--transition-bounce) forwards;
+        }
+
+        @keyframes modalPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.90) translateY(16px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .confirmation-box .conf-icon {
+            font-size: 36px;
+            margin-bottom: 14px;
+            display: block;
+        }
+        .confirmation-box h3 {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        .confirmation-box p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 26px;
+        }
+        .confirmation-box .conf-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .conf-btn {
+            padding: 9px 24px;
+            border-radius: 30px;
+            border: none;
+            font-family: var(--font);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition-speed) ease,
+                color var(--transition-speed) ease,
+                transform 0.15s ease,
+                box-shadow 0.2s ease;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            letter-spacing: 0.2px;
+        }
+        .conf-btn:hover {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+            transform: translateY(-1px);
+        }
+        .conf-btn:active {
+            transform: scale(0.96);
+        }
+        .conf-btn.primary {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 24px var(--accent-cyan-glow);
+        }
+        .conf-btn.primary:hover {
+            background: var(--accent-cyan);
+            filter: brightness(1.1);
+            box-shadow: 0 0 36px var(--accent-cyan-glow);
+        }
+        .conf-btn.danger {
+            background: var(--accent-red);
+            color: #fff;
+            box-shadow: 0 0 24px rgba(255, 94, 122, 0.3);
+        }
+        .conf-btn.danger:hover {
+            background: var(--accent-red);
+            filter: brightness(1.1);
+            box-shadow: 0 0 36px rgba(255, 94, 122, 0.4);
+        }
+        .conf-btn.gold {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            box-shadow: 0 0 24px var(--accent-gold-glow);
+        }
+        .conf-btn.gold:hover {
+            background: var(--accent-gold);
+            filter: brightness(1.1);
+            box-shadow: 0 0 36px var(--accent-gold-glow);
+        }
+
+        /* ============================================================
+                   RESPONSIVIDADE
+                   ============================================================ */
+
+        @media (max-width: 1024px) {
+            #content {
+                padding: 24px 28px 36px 28px;
+            }
+            .header-search {
+                min-width: 150px;
+                max-width: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --sidebar-width: 290px;
+                --header-height: 58px;
+            }
+
+            #hamburger {
+                display: flex;
+            }
+
+            #sidebar {
+                transform: translateX(-100%);
+                box-shadow: var(--shadow-lg);
+                border-right: none;
+            }
+            #sidebar.open {
+                transform: translateX(0);
+            }
+
+            #main {
+                margin-left: 0;
+            }
+
+            #content {
+                padding: 18px 18px 28px 18px;
+            }
+
+            .header-left .header-breadcrumb {
+                display: none;
+            }
+            .header-title {
+                font-size: 15px;
+            }
+
+            .header-search {
+                min-width: 100px;
+                max-width: 160px;
+                padding: 0 12px;
+            }
+            .header-search input {
+                font-size: 12px;
+                padding: 6px 0;
+            }
+
+            .header-actions .header-btn .tooltip {
+                display: none !important;
+            }
+            .header-actions .header-btn {
+                padding: 5px 7px;
+                font-size: 14px;
+            }
+
+            .save-indicator span {
+                display: none;
+            }
+            .save-indicator {
+                padding: 4px 10px 4px 8px;
+            }
+
+            .confirmation-box {
+                padding: 28px 24px;
+                margin: 16px;
+            }
+            .confirmation-box .conf-actions {
+                flex-wrap: wrap;
+            }
+            .confirmation-box .conf-actions .conf-btn {
+                flex: 1;
+                min-width: 80px;
+                text-align: center;
+            }
+
+            #toast-container {
+                bottom: 16px;
+                right: 16px;
+                left: 16px;
+                max-width: 100%;
+            }
+            .toast {
+                padding: 14px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #content {
+                padding: 12px 12px 20px 12px;
+            }
+            .header-actions .header-btn {
+                padding: 4px 5px;
+                font-size: 13px;
+            }
+            .header-search {
+                min-width: 70px;
+                max-width: 110px;
+                padding: 0 8px;
+            }
+            .header-search input {
+                font-size: 11px;
+            }
+            .sidebar-logo .logo-text {
+                font-size: 16px;
+            }
+            .sidebar-logo .logo-badge {
+                font-size: 7px;
+                padding: 2px 8px;
+            }
+        }
+
+        /* ============================================================
+                   OVERLAY PARA SIDEBAR EM MOBILE
+                   ============================================================ */
+        #sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            transition: opacity 0.3s ease;
+        }
+        #sidebar-overlay.open {
+            display: block;
+        }
+
+        @media (min-width: 769px) {
+            #sidebar-overlay {
+                display: none !important;
+            }
+        }
+
+        /* ============================================================
+                   UTILITÁRIOS ADICIONAIS
+                   ============================================================ */
+        .hidden {
+            display: none !important;
+        }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .gap-12 {
+            gap: 12px;
+        }
+        .text-glow {
+            text-shadow: 0 0 30px var(--accent-cyan-glow);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    APP
+    ============================================================ -->
+    <div id="app">
+
+        <!-- ============================================================
+        SIDEBAR OVERLAY (mobile)
+        ============================================================ -->
+        <div id="sidebar-overlay"></div>
+
+        <!-- ============================================================
+        SIDEBAR
+        ============================================================ -->
+        <nav id="sidebar" role="navigation" aria-label="Navegação principal">
+            <!-- Logo -->
+            <div class="sidebar-logo">
+                <div class="logo-icon" aria-hidden="true">✦</div>
+                <span class="logo-text">Game Hub</span>
+                <span class="logo-badge">v2.0</span>
+            </div>
+
+            <!-- Navegação (injetada via JS) -->
+            <div class="sidebar-nav" id="sidebarNav"></div>
+        </nav>
+
+        <!-- ============================================================
+        MAIN
+        ============================================================ -->
+        <div id="main">
+            <!-- HEADER -->
+            <header id="header">
+                <!-- Hambúrguer -->
+                <button id="hamburger" aria-label="Abrir menu de navegação" title="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Título + Breadcrumb -->
+                <div class="header-left">
+                    <span class="header-title" id="pageTitle">Overview</span>
+                    <div class="header-breadcrumb" id="breadcrumb">
+                        <span class="crumb">Hub</span>
+                        <span class="sep">/</span>
+                        <span class="crumb crumb-link" data-page="overview">Overview</span>
+                    </div>
+                </div>
+
+                <!-- Busca -->
+                <div class="header-search" role="search">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input type="text" id="globalSearch" placeholder="Pesquisar..." aria-label="Pesquisa global">
+                </div>
+
+                <!-- Ações -->
+                <div class="header-actions">
+                    <button class="header-btn" id="btnExport" title="Exportar projeto">
+                        <i class="fas fa-file-export"></i>
+                        <span class="tooltip">Exportar</span>
+                    </button>
+                    <button class="header-btn" id="btnImport" title="Importar projeto">
+                        <i class="fas fa-file-import"></i>
+                        <span class="tooltip">Importar</span>
+                    </button>
+                    <button class="header-btn" id="btnBackup" title="Criar backup">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span class="tooltip">Backup</span>
+                    </button>
+                    <button class="header-btn" id="btnRestore" title="Restaurar backup">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        <span class="tooltip">Restaurar</span>
+                    </button>
+                    <button class="header-btn" id="btnTheme" title="Alternar tema">
+                        <i class="fas fa-palette"></i>
+                        <span class="tooltip">Tema</span>
+                    </button>
+                    <button class="header-btn" id="btnSettings" title="Configurações">
+                        <i class="fas fa-sliders-h"></i>
+                        <span class="tooltip">Configurações</span>
+                    </button>
+                    <button class="header-btn" id="btnReset" title="Resetar projeto">
+                        <i class="fas fa-trash-alt"></i>
+                        <span class="tooltip">Resetar</span>
+                    </button>
+
+                    <div class="save-indicator" id="saveIndicator" title="Status do salvamento">
+                        <span class="dot" id="saveDot"></span>
+                        <span id="saveText">Salvo</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- CONTEÚDO PRINCIPAL -->
+            <main id="content" role="main">
+                <div id="pageContainer" class="page-enter">
+                    <div class="page-placeholder">
+                        <div class="spinner"></div>
+                        <h2>Carregando...</h2>
+                        <p>Aguardando o carregamento do conteúdo.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    TOAST CONTAINER
+    ============================================================ -->
+    <div id="toast-container" aria-live="polite"></div>
+
+    <!-- ============================================================
+    CONFIRMATION OVERLAY
+    ============================================================ -->
+    <div id="confirmation-overlay" role="dialog" aria-modal="true" aria-labelledby="confTitle">
+        <div class="confirmation-box">
+            <span class="conf-icon" id="confIcon">⚠️</span>
+            <h3 id="confTitle">Confirmar</h3>
+            <p id="confMessage">Tem certeza que deseja continuar?</p>
+            <div class="conf-actions">
+                <button class="conf-btn" id="confCancel">Cancelar</button>
+                <button class="conf-btn primary" id="confConfirm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    INPUT OCULTO PARA IMPORTAR ARQUIVO
+    ============================================================ -->
+    <input type="file" id="fileInput" accept=".json" style="display:none">
+
+    <!-- ============================================================
+    JAVASCRIPT — HUB PRINCIPAL (atualizado)
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================================
+            // CONFIGURAÇÃO — com "overview"
+            // ============================================================
+            const CONFIG = {
+                version: '2.0.0',
+                storageKey: 'gamehub_project',
+                backupKey: 'gamehub_backups',
+                settingsKey: 'gamehub_settings',
+                maxBackups: 10,
+                autoSaveDelay: 800,
+                pagesBase: 'pages/',
+                defaultPage: 'overview',
+                sidebarItems: [{
+                    group: 'Geral',
+                    items: [
+                        { id: 'overview', label: 'Overview', icon: 'fa-gauge-high' },
+                        { id: 'historia', label: 'História', icon: 'fa-book' },
+                        { id: 'personagens', label: 'Personagens', icon: 'fa-users' },
+                        { id: 'cidade', label: 'Cidade', icon: 'fa-city' },
+                        { id: 'lugares', label: 'Lugares', icon: 'fa-location-dot' },
+                        { id: 'timeline', label: 'Linha do Tempo', icon: 'fa-timeline' },
+                        { id: 'anomalia', label: 'Anomalia', icon: 'fa-triangle-exclamation' }
+                    ]
+                }, {
+                    group: 'Desenvolvimento',
+                    items: [
+                        { id: 'capitulos', label: 'Capítulos', icon: 'fa-book-open' },
+                        { id: 'mecanicas', label: 'Mecânicas', icon: 'fa-gear' },
+                        { id: 'minijogos', label: 'Minijogos', icon: 'fa-gamepad' },
+                        { id: 'objetos', label: 'Objetos', icon: 'fa-cube' },
+                        { id: 'artes', label: 'Artes', icon: 'fa-palette' },
+                        { id: 'interface', label: 'Interface', icon: 'fa-display' },
+                        { id: 'programacao', label: 'Programação', icon: 'fa-code' }
+                    ]
+                }, {
+                    group: 'Gestão',
+                    items: [
+                        { id: 'tarefas', label: 'Tarefas', icon: 'fa-list-check' },
+                        { id: 'inspiracoes', label: 'Inspirações', icon: 'fa-lightbulb' },
+                        { id: 'mural', label: 'Mural', icon: 'fa-notes-sticky' },
+                        { id: 'referencias', label: 'Referências', icon: 'fa-bookmark' }
+                    ]
+                }],
+                themes: ['dark', 'dark-blue', 'cyber', 'glass'],
+                defaultTheme: 'dark'
+            };
+
+            // ============================================================
+            // ESTADO
+            // ============================================================
+            const state = {
+                currentPage: CONFIG.defaultPage,
+                projectData: null,
+                settings: { theme: CONFIG.defaultTheme },
+                isSaving: false,
+                saveTimeout: null,
+                sidebarOpen: false,
+                isMobile: window.innerWidth <= 768,
+                pageCache: {}
+            };
+
+            // ============================================================
+            // DOM REFS
+            // ============================================================
+            const $ = (sel, ctx) => (ctx || document).querySelector(sel);
+            const $$ = (sel, ctx) => [...(ctx || document).querySelectorAll(sel)];
+
+            const dom = {
+                sidebar: $('#sidebar'),
+                sidebarNav: $('#sidebarNav'),
+                sidebarOverlay: $('#sidebar-overlay'),
+                hamburger: $('#hamburger'),
+                main: $('#main'),
+                content: $('#content'),
+                pageContainer: $('#pageContainer'),
+                pageTitle: $('#pageTitle'),
+                breadcrumb: $('#breadcrumb'),
+                globalSearch: $('#globalSearch'),
+                saveIndicator: $('#saveIndicator'),
+                saveDot: $('#saveDot'),
+                saveText: $('#saveText'),
+                toastContainer: $('#toast-container'),
+                confOverlay: $('#confirmation-overlay'),
+                confIcon: $('#confIcon'),
+                confTitle: $('#confTitle'),
+                confMessage: $('#confMessage'),
+                confConfirm: $('#confConfirm'),
+                confCancel: $('#confCancel'),
+                fileInput: $('#fileInput'),
+                btnExport: $('#btnExport'),
+                btnImport: $('#btnImport'),
+                btnBackup: $('#btnBackup'),
+                btnRestore: $('#btnRestore'),
+                btnTheme: $('#btnTheme'),
+                btnSettings: $('#btnSettings'),
+                btnReset: $('#btnReset'),
+            };
+
+            // ============================================================
+            // SISTEMA DE TEMAS (com ícone dinâmico)
+            // ============================================================
+            const ThemeSystem = {
+                current: CONFIG.defaultTheme,
+
+                init() {
+                    const saved = state.settings?.theme || CONFIG.defaultTheme;
+                    this.set(saved);
+                },
+
+                set(theme) {
+                    if (!CONFIG.themes.includes(theme)) theme = CONFIG.defaultTheme;
+                    this.current = theme;
+                    document.documentElement.setAttribute('data-theme', theme);
+                    if (state.settings) {
+                        state.settings.theme = theme;
+                        Storage.saveSettings();
+                    }
+                    // Atualizar ícone do botão
+                    const icon = dom.btnTheme.querySelector('i');
+                    if (icon) {
+                        const map = {
+                            'dark': 'fa-moon',
+                            'dark-blue': 'fa-moon',
+                            'cyber': 'fa-microchip',
+                            'glass': 'fa-water'
+                        };
+                        icon.className = 'fas ' + (map[theme] || 'fa-palette');
+                    }
+                },
+
+                toggle() {
+                    const idx = CONFIG.themes.indexOf(this.current);
+                    const next = CONFIG.themes[(idx + 1) % CONFIG.themes.length];
+                    this.set(next);
+                    HubAPI.showNotification('Tema alterado para ' + this._label(next), 'info');
+                },
+
+                _label(theme) {
+                    const map = {
+                        'dark': 'Escuro',
+                        'dark-blue': 'Azul Escuro',
+                        'cyber': 'Cyber',
+                        'glass': 'Vidro'
+                    };
+                    return map[theme] || theme;
+                }
+            };
+
+            // ============================================================
+            // SISTEMA DE STORAGE (idêntico ao anterior)
+            // ============================================================
+            const Storage = {
+                getProject() {
+                    try {
+                        const raw = localStorage.getItem(CONFIG.storageKey);
+                        if (raw) {
+                            const data = JSON.parse(raw);
+                            if (data && typeof data === 'object') return data;
+                        }
+                    } catch (_) {}
+                    return null;
+                },
+                saveProject(data) {
+                    try {
+                        const payload = { version: CONFIG.version, lastSaved: new Date().toISOString(), data: data || {} };
+                        localStorage.setItem(CONFIG.storageKey, JSON.stringify(payload));
+                        return true;
+                    } catch (_) { return false; }
+                },
+                loadProject() {
+                    const raw = this.getProject();
+                    return raw ? raw.data || {} : {};
+                },
+                getSettings() {
+                    try {
+                        const raw = localStorage.getItem(CONFIG.settingsKey);
+                        if (raw) { const parsed = JSON.parse(raw); if (parsed && typeof parsed === 'object') return parsed; }
+                    } catch (_) {}
+                    return null;
+                },
+                saveSettings(settings) {
+                    try { localStorage.setItem(CONFIG.settingsKey, JSON.stringify(settings)); return true; } catch (_) {
+                        return false; }
+                },
+                getBackups() {
+                    try {
+                        const raw = localStorage.getItem(CONFIG.backupKey);
+                        if (raw) { const parsed = JSON.parse(raw); if (Array.isArray(parsed)) return parsed; }
+                    } catch (_) {}
+                    return [];
+                },
+                saveBackups(backups) {
+                    try {
+                        const limited = backups.slice(0, CONFIG.maxBackups);
+                        localStorage.setItem(CONFIG.backupKey, JSON.stringify(limited));
+                        return true;
+                    } catch (_) { return false; }
+                },
+                createBackup() {
+                    const project = this.getProject();
+                    if (!project) return false;
+                    const backups = this.getBackups();
+                    const entry = { id: Date.now(), timestamp: new Date().toISOString(), data: project };
+                    backups.unshift(entry);
+                    this.saveBackups(backups);
+                    return entry;
+                },
+                restoreBackup(id) {
+                    const backups = this.getBackups();
+                    const entry = backups.find(b => b.id === id);
+                    if (!entry) return false;
+                    try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(entry.data)); return true; } catch (_) {
+                        return false; }
+                },
+                getLatestBackup() {
+                    const backups = this.getBackups();
+                    return backups.length > 0 ? backups[0] : null;
+                },
+                resetProject() {
+                    try { localStorage.removeItem(CONFIG.storageKey); return true; } catch (_) { return false; }
+                },
+                exportJSON() {
+                    const project = this.getProject();
+                    if (!project) return null;
+                    return JSON.stringify(project, null, 2);
+                },
+                importJSON(json) {
+                    try {
+                        const data = JSON.parse(json);
+                        if (!data || typeof data !== 'object') return false;
+                        localStorage.setItem(CONFIG.storageKey, JSON.stringify(data));
+                        return true;
+                    } catch (_) { return false; }
+                }
+            };
+
+            // ============================================================
+            // SISTEMA DE NOTIFICAÇÕES (Toasts) — mesma implementação
+            // ============================================================
+            const Notifications = {
+                _container: dom.toastContainer,
+                show(message, type = 'info', duration = 4000) {
+                    const types = {
+                        success: { icon: 'fa-check-circle', label: 'Sucesso' },
+                        error: { icon: 'fa-times-circle', label: 'Erro' },
+                        warning: { icon: 'fa-exclamation-triangle', label: 'Aviso' },
+                        info: { icon: 'fa-info-circle', label: 'Informação' }
+                    };
+                    const t = types[type] || types.info;
+                    const toast = document.createElement('div');
+                    toast.className = `toast ${type}`;
+                    toast.innerHTML = `
+                        <span class="toast-icon"><i class="fas ${t.icon}"></i></span>
+                        <div class="toast-content">
+                            <div class="toast-title">${t.label}</div>
+                            <div class="toast-message">${message}</div>
+                        </div>
+                        <button class="toast-close" aria-label="Fechar notificação"><i class="fas fa-times"></i></button>
+                    `;
+                    const close = () => {
+                        toast.classList.add('removing');
+                        setTimeout(() => { if (toast.parentNode) toast.remove(); }, 300);
+                    };
+                    toast.querySelector('.toast-close').addEventListener('click', close);
+                    this._container.appendChild(toast);
+                    if (duration > 0) setTimeout(close, duration);
+                    return toast;
+                },
+                success(msg, dur) { return this.show(msg, 'success', dur); },
+                error(msg, dur) { return this.show(msg, 'error', dur); },
+                warning(msg, dur) { return this.show(msg, 'warning', dur); },
+                info(msg, dur) { return this.show(msg, 'info', dur); }
+            };
+
+            // ============================================================
+            // SISTEMA DE CONFIRMAÇÃO (mesmo)
+            // ============================================================
+            const Confirmation = {
+                _resolve: null,
+                _reject: null,
+                show(message, title = 'Confirmar', icon = '⚠️', confirmLabel = 'Confirmar', cancelLabel = 'Cancelar',
+                    isDanger = false) {
+                    return new Promise((resolve, reject) => {
+                        dom.confIcon.textContent = icon;
+                        dom.confTitle.textContent = title;
+                        dom.confMessage.textContent = message;
+                        dom.confConfirm.textContent = confirmLabel;
+                        dom.confCancel.textContent = cancelLabel;
+                        dom.confConfirm.className = isDanger ? 'conf-btn danger' : 'conf-btn primary';
+                        dom.confOverlay.classList.add('open');
+                        this._resolve = resolve;
+                        this._reject = reject;
+                    });
+                },
+                _close(result) {
+                    dom.confOverlay.classList.remove('open');
+                    if (result === true && this._resolve) this._resolve(true);
+                    else if (result === false && this._reject) this._reject(false);
+                    else if (this._resolve) this._resolve(result);
+                    this._resolve = null;
+                    this._reject = null;
+                },
+                _initEvents() {
+                    dom.confConfirm.addEventListener('click', () => this._close(true));
+                    dom.confCancel.addEventListener('click', () => this._close(false));
+                    dom.confOverlay.addEventListener('click', (e) => {
+                        if (e.target === dom.confOverlay) this._close(false);
+                    });
+                    document.addEventListener('keydown', (e) => {
+                        if (!dom.confOverlay.classList.contains('open')) return;
+                        if (e.key === 'Escape') this._close(false);
+                        if (e.key === 'Enter') this._close(true);
+                    });
+                }
+            };
+
+            // ============================================================
+            // SISTEMA DE CARREGAMENTO DE PÁGINAS (mesmo)
+            // ============================================================
+            const PageLoader = {
+                _currentPageId: null,
+                _isLoading: false,
+
+                async load(pageId) {
+                    if (this._isLoading) return;
+                    if (pageId === this._currentPageId && dom.pageContainer.dataset.page === pageId) return;
+
+                    this._isLoading = true;
+                    const container = dom.pageContainer;
+                    const titleEl = dom.pageTitle;
+                    const breadcrumbEl = dom.breadcrumb;
+
+                    container.innerHTML = `
+                        <div class="page-placeholder">
+                            <div class="spinner"></div>
+                            <h2>Carregando...</h2>
+                            <p>Aguarde enquanto o conteúdo é preparado.</p>
+                        </div>
+                    `;
+                    container.className = 'page-enter';
+                    container.dataset.page = pageId;
+
+                    const label = this._getPageLabel(pageId);
+                    titleEl.textContent = label || pageId;
+                    breadcrumbEl.innerHTML = `
+                        <span class="crumb">Hub</span>
+                        <span class="sep">/</span>
+                        <span class="crumb">${label || pageId}</span>
+                    `;
+
+                    Sidebar.setActive(pageId);
+
+                    if (window.location.hash !== '#' + pageId) {
+                        history.pushState({ page: pageId }, '', '#' + pageId);
+                    }
+
+                    try {
+                        const url = CONFIG.pagesBase + pageId + '.html';
+                        const response = await fetch(url);
+                        if (!response.ok) throw new Error('Página não encontrada');
+                        const html = await response.text();
+                        const processed = this._processPageHTML(html, pageId);
+                        container.innerHTML = processed.content;
+                        container.className = 'page-enter';
+                        container.dataset.page = pageId;
+                        this._injectStyles(processed.styles, pageId);
+                        this._executeScripts(processed.scripts, pageId);
+                        const pageTitle = this._extractTitle(html) || label || pageId;
+                        titleEl.textContent = pageTitle;
+                        breadcrumbEl.innerHTML = `
+                            <span class="crumb">Hub</span>
+                            <span class="sep">/</span>
+                            <span class="crumb">${pageTitle}</span>
+                        `;
+                        this._currentPageId = pageId;
+                        Notifications.info('Página carregada: ' + pageTitle, 1500);
+                    } catch (err) {
+                        console.warn('Erro ao carregar página:', err);
+                        container.innerHTML = `
+                            <div class="page-placeholder">
+                                <div class="icon-big"><i class="fas fa-file"></i></div>
+                                <h2>Página em Construção</h2>
+                                <p>A página <strong>${pageId}</strong> ainda não foi criada.<br>
+                                Crie o arquivo <code>pages/${pageId}.html</code> para começar.</p>
+                                <div style="margin-top:12px;font-size:12px;color:var(--text-muted);">
+                                    <i class="fas fa-lightbulb"></i> Dica: copie um modelo existente
+                                </div>
+                            </div>
+                        `;
+                        container.className = 'page-enter';
+                        container.dataset.page = pageId;
+                        titleEl.textContent = label || pageId;
+                    }
+                    this._isLoading = false;
+                },
+
+                _getPageLabel(id) {
+                    for (const group of CONFIG.sidebarItems) {
+                        for (const item of group.items) {
+                            if (item.id === id) return item.label;
+                        }
+                    }
+                    return id.charAt(0).toUpperCase() + id.slice(1);
+                },
+
+                _extractTitle(html) {
+                    const match = html.match(/<title[^>]*>([^<]*)<\/title>/i);
+                    return match ? match[1].trim() : null;
+                },
+
+                _processPageHTML(html, pageId) {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const bodyContent = doc.body ? doc.body.innerHTML : '';
+                    const styles = [];
+                    doc.querySelectorAll('style').forEach((style, i) => {
+                        styles.push({ id: 'page-style-' + pageId + '-' + i, content: style.textContent });
+                    });
+                    const scripts = [];
+                    doc.querySelectorAll('script').forEach((script, i) => {
+                        if (script.src) {
+                            scripts.push({ id: 'page-script-' + pageId + '-' + i, src: script.src, content: null });
+                        } else {
+                            scripts.push({ id: 'page-script-' + pageId + '-' + i, src: null, content: script
+                                    .textContent });
+                        }
+                    });
+                    return {
+                        content: bodyContent || '<div class="page-placeholder"><p>Conteúdo vazio</p></div>',
+                        styles,
+                        scripts
+                    };
+                },
+
+                _injectStyles(styles, pageId) {
+                    document.querySelectorAll('style[id^="page-style-' + pageId + '"]').forEach(el => el.remove());
+                    styles.forEach(style => {
+                        const el = document.createElement('style');
+                        el.id = style.id;
+                        el.textContent = style.content;
+                        document.head.appendChild(el);
+                    });
+                },
+
+                _executeScripts(scripts, pageId) {
+                    document.querySelectorAll('script[id^="page-script-' + pageId + '"]').forEach(el => el.remove());
+                    scripts.forEach(script => {
+                        const el = document.createElement('script');
+                        el.id = script.id;
+                        if (script.src) { el.src = script.src;
+                            el.async = true; } else if (script.content) { el.textContent = script.content; }
+                        document.body.appendChild(el);
+                    });
+                }
+            };
+
+            // ============================================================
+            // SIDEBAR
+            // ============================================================
+            const Sidebar = {
+                _activeId: null,
+
+                render() {
+                    const nav = dom.sidebarNav;
+                    let html = '';
+                    for (const group of CONFIG.sidebarItems) {
+                        html += `<div class="sidebar-group">`;
+                        html += `<div class="sidebar-group-title">${group.group}</div>`;
+                        for (const item of group.items) {
+                            const active = item.id === this._activeId ? 'active' : '';
+                            html += `
+                                <div class="sidebar-item ${active}" data-page="${item.id}" role="button" tabindex="0" aria-label="${item.label}" title="${item.label}">
+                                    <span class="icon"><i class="fas ${item.icon}"></i></span>
+                                    <span class="label">${item.label}</span>
+                                </div>
+                            `;
+                        }
+                        html += `</div>`;
+                    }
+                    nav.innerHTML = html;
+
+                    nav.querySelectorAll('.sidebar-item').forEach(el => {
+                        el.addEventListener('click', () => {
+                            const page = el.dataset.page;
+                            if (page) this.navigate(page);
+                        });
+                        el.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                const page = el.dataset.page;
+                                if (page) this.navigate(page);
+                            }
+                        });
+                    });
+                },
+
+                setActive(pageId) {
+                    this._activeId = pageId;
+                    const items = dom.sidebarNav.querySelectorAll('.sidebar-item');
+                    items.forEach(el => {
+                        el.classList.toggle('active', el.dataset.page === pageId);
+                    });
+                },
+
+                navigate(pageId) {
+                    if (pageId === this._activeId && dom.pageContainer.dataset.page === pageId) return;
+                    PageLoader.load(pageId);
+                    if (state.isMobile) this.close();
+                },
+
+                open() {
+                    dom.sidebar.classList.add('open');
+                    dom.sidebarOverlay.classList.add('open');
+                    state.sidebarOpen = true;
+                },
+
+                close() {
+                    dom.sidebar.classList.remove('open');
+                    dom.sidebarOverlay.classList.remove('open');
+                    state.sidebarOpen = false;
+                },
+
+                toggle() {
+                    state.sidebarOpen ? this.close() : this.open();
+                },
+
+                init() {
+                    this.render();
+                    const initialPage = window.location.hash.replace('#', '') || CONFIG.defaultPage;
+                    this.setActive(initialPage);
+                    PageLoader.load(initialPage);
+                }
+            };
+
+            // ============================================================
+            // HUB API — EXPOSIÇÃO GLOBAL (mesmo, com nome Overview)
+            // ============================================================
+            const HubAPI = {
+                getData(key) {
+                    const project = Storage.getProject();
+                    if (!project) return null;
+                    if (key) return project.data && project.data[key] !== undefined ? project.data[key] : null;
+                    return project.data || {};
+                },
+                saveData(key, data) {
+                    const project = Storage.getProject();
+                    if (!project) {
+                        const newProject = { version: CONFIG.version, lastSaved: new Date().toISOString(), data: {} };
+                        newProject.data[key] = data;
+                        Storage.saveProject(newProject.data);
+                    } else {
+                        if (!project.data) project.data = {};
+                        project.data[key] = data;
+                        Storage.saveProject(project.data);
+                    }
+                    this._triggerAutoSave();
+                    return true;
+                },
+                getAllData() {
+                    const project = Storage.getProject();
+                    return project ? project.data || {} : {};
+                },
+                setAllData(data) {
+                    Storage.saveProject(data || {});
+                    this._triggerAutoSave();
+                    return true;
+                },
+                showNotification: (msg, type, dur) => Notifications.show(msg, type, dur),
+                showConfirmation: (msg, title, icon, confirmLabel, cancelLabel, isDanger) =>
+                    Confirmation.show(msg, title, icon, confirmLabel, cancelLabel, isDanger),
+                exportProject() {
+                    const json = Storage.exportJSON();
+                    if (!json) { Notifications.error('Nenhum dado para exportar.'); return; }
+                    const blob = new Blob([json], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `gamehub_project_${new Date().toISOString().slice(0,10)}.json`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    Notifications.success('Projeto exportado com sucesso!');
+                },
+                importProject(file) {
+                    return new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            try {
+                                const json = e.target.result;
+                                const success = Storage.importJSON(json);
+                                if (success) {
+                                    Notifications.success('Projeto importado com sucesso!');
+                                    this._triggerAutoSave();
+                                    resolve(true);
+                                } else {
+                                    Notifications.error('Erro ao importar: arquivo inválido.');
+                                    reject(new Error('Arquivo inválido'));
+                                }
+                            } catch (err) {
+                                Notifications.error('Erro ao importar: ' + err.message);
+                                reject(err);
+                            }
+                        };
+                        reader.onerror = () => { Notifications.error('Erro ao ler o arquivo.');
+                            reject(new Error('Erro de leitura')); };
+                        reader.readAsText(file);
+                    });
+                },
+                createBackup() {
+                    const entry = Storage.createBackup();
+                    if (entry) { Notifications.success('Backup criado com sucesso!'); return entry; } else { Notifications
+                            .error('Erro ao criar backup.'); return null; }
+                },
+                restoreBackup(id) {
+                    return new Promise((resolve, reject) => {
+                        this.showConfirmation(
+                            'Deseja restaurar este backup? Os dados atuais serão substituídos.',
+                            'Restaurar Backup', '🔄', 'Restaurar', 'Cancelar', false
+                        ).then(() => {
+                            const success = Storage.restoreBackup(id);
+                            if (success) {
+                                Notifications.success('Backup restaurado com sucesso!');
+                                this._triggerAutoSave();
+                                resolve(true);
+                            } else {
+                                Notifications.error('Erro ao restaurar backup.');
+                                reject(new Error('Erro ao restaurar'));
+                            }
+                        }).catch(() => resolve(false));
+                    });
+                },
+                restoreLatestBackup() {
+                    const latest = Storage.getLatestBackup();
+                    if (!latest) { Notifications.warning('Nenhum backup disponível.'); return Promise.resolve(false); }
+                    return this.restoreBackup(latest.id);
+                },
+                changeTheme: (theme) => ThemeSystem.set(theme),
+                getCurrentTheme: () => ThemeSystem.current,
+                getSettings: () => state.settings || {},
+                updateSettings(settings) {
+                    state.settings = { ...state.settings, ...settings };
+                    Storage.saveSettings(state.settings);
+                    if (settings.theme) ThemeSystem.set(settings.theme);
+                    return true;
+                },
+                setTitle(title) { dom.pageTitle.textContent = title || 'Game Hub'; },
+                updateBreadcrumb(items) {
+                    if (!items || !items.length) {
+                        dom.breadcrumb.innerHTML = `<span class="crumb">Hub</span>`;
+                        return;
+                    }
+                    let html = '';
+                    items.forEach((item, idx) => {
+                        if (idx > 0) html += `<span class="sep">/</span>`;
+                        const isLast = idx === items.length - 1;
+                        if (isLast) {
+                            html += `<span class="crumb">${item}</span>`;
+                        } else {
+                            html += `<span class="crumb crumb-link" data-page="${item.toLowerCase()}">${item}</span>`;
+                        }
+                    });
+                    dom.breadcrumb.innerHTML = html;
+                    dom.breadcrumb.querySelectorAll('.crumb-link').forEach(el => {
+                        el.addEventListener('click', () => {
+                            const page = el.dataset.page;
+                            if (page) Sidebar.navigate(page);
+                        });
+                    });
+                },
+                resetProject() {
+                    return new Promise((resolve, reject) => {
+                        this.showConfirmation(
+                            'Todos os dados do projeto serão perdidos. Esta ação não pode ser desfeita.',
+                            'Resetar Projeto', '⚠️', 'Resetar', 'Cancelar', true
+                        ).then(() => {
+                            const success = Storage.resetProject();
+                            if (success) {
+                                Notifications.success('Projeto resetado com sucesso!');
+                                this._triggerAutoSave();
+                                const current = state.currentPage || CONFIG.defaultPage;
+                                PageLoader.load(current);
+                                resolve(true);
+                            } else {
+                                Notifications.error('Erro ao resetar projeto.');
+                                reject(new Error('Erro ao resetar'));
+                            }
+                        }).catch(() => resolve(false));
+                    });
+                },
+                _triggerAutoSave() {
+                    if (state.saveTimeout) clearTimeout(state.saveTimeout);
+                    state.saveTimeout = setTimeout(() => AutoSave.save(), CONFIG.autoSaveDelay);
+                },
+                reloadPage() {
+                    const current = state.currentPage || CONFIG.defaultPage;
+                    PageLoader.load(current);
+                }
+            };
+
+            // ============================================================
+            // AUTO-SAVE (mesmo)
+            // ============================================================
+            const AutoSave = {
+                save() {
+                    if (state.isSaving) return;
+                    state.isSaving = true;
+                    dom.saveDot.className = 'dot saving';
+                    dom.saveText.textContent = 'Salvando...';
+                    try {
+                        const project = Storage.getProject();
+                        if (project) {
+                            project.lastSaved = new Date().toISOString();
+                            localStorage.setItem(CONFIG.storageKey, JSON.stringify(project));
+                        }
+                        dom.saveDot.className = 'dot';
+                        dom.saveText.textContent = 'Salvo';
+                        state.isSaving = false;
+                    } catch (err) {
+                        dom.saveDot.className = 'dot error';
+                        dom.saveText.textContent = 'Erro';
+                        state.isSaving = false;
+                        console.error('Auto-save error:', err);
+                    }
+                },
+                init() {
+                    setInterval(() => { if (!state.isSaving) this.save(); }, 30000);
+                    window.addEventListener('beforeunload', () => { this.save(); });
+                }
+            };
+
+            // ============================================================
+            // PESQUISA GLOBAL (mesmo)
+            // ============================================================
+            const GlobalSearch = {
+                _input: dom.globalSearch,
+                init() {
+                    this._input.addEventListener('input', (e) => {
+                        const query = e.target.value.trim().toLowerCase();
+                        if (query.length === 0) { this._clearHighlights(); return; }
+                        this._search(query);
+                    });
+                    this._input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape') { this._input.value = '';
+                            this._clearHighlights();
+                            this._input.blur(); }
+                    });
+                },
+                _search(query) {
+                    const items = dom.sidebarNav.querySelectorAll('.sidebar-item');
+                    let found = false;
+                    items.forEach(el => {
+                        const label = el.querySelector('.label')?.textContent?.toLowerCase() || '';
+                        const match = label.includes(query);
+                        el.style.display = match ? '' : 'none';
+                        if (match) found = true;
+                    });
+                    const groups = dom.sidebarNav.querySelectorAll('.sidebar-group');
+                    groups.forEach(group => {
+                        const visibleItems = group.querySelectorAll('.sidebar-item[style*="display: none"]');
+                        const allItems = group.querySelectorAll('.sidebar-item');
+                        const hasVisible = allItems.length > visibleItems.length;
+                        group.style.display = hasVisible ? '' : 'none';
+                    });
+                    let msg = dom.sidebarNav.querySelector('.search-empty');
+                    if (!found && query.length > 0) {
+                        if (!msg) {
+                            msg = document.createElement('div');
+                            msg.className = 'search-empty';
+                            msg.style.cssText =
+                                'padding:20px 12px;color:var(--text-muted);font-size:13px;text-align:center;';
+                            dom.sidebarNav.appendChild(msg);
+                        }
+                        msg.textContent = 'Nenhum resultado para "' + query + '"';
+                    } else {
+                        if (msg) msg.remove();
+                    }
+                },
+                _clearHighlights() {
+                    dom.sidebarNav.querySelectorAll('.sidebar-item').forEach(el => { el.style.display = ''; });
+                    dom.sidebarNav.querySelectorAll('.sidebar-group').forEach(el => { el.style.display = ''; });
+                    const msg = dom.sidebarNav.querySelector('.search-empty');
+                    if (msg) msg.remove();
+                }
+            };
+
+            // ============================================================
+            // EVENTOS DO HEADER
+            // ============================================================
+            function initHeaderEvents() {
+                dom.hamburger.addEventListener('click', () => Sidebar.toggle());
+
+                dom.btnExport.addEventListener('click', () => HubAPI.exportProject());
+
+                dom.btnImport.addEventListener('click', () => dom.fileInput.click());
+                dom.fileInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        HubAPI.importProject(file).then(() => HubAPI.reloadPage()).catch(() => {});
+                    }
+                    dom.fileInput.value = '';
+                });
+
+                dom.btnBackup.addEventListener('click', () => HubAPI.createBackup());
+
+                dom.btnRestore.addEventListener('click', async () => {
+                    const latest = Storage.getLatestBackup();
+                    if (!latest) { Notifications.warning('Nenhum backup disponível.'); return; }
+                    await HubAPI.restoreLatestBackup();
+                    HubAPI.reloadPage();
+                });
+
+                dom.btnTheme.addEventListener('click', () => ThemeSystem.toggle());
+
+                dom.btnSettings.addEventListener('click', () => {
+                    Notifications.info('Configurações: tema atual = ' + ThemeSystem.current, 3000);
+                });
+
+                dom.btnReset.addEventListener('click', async () => {
+                    await HubAPI.resetProject();
+                    HubAPI.reloadPage();
+                });
+
+                dom.breadcrumb.addEventListener('click', (e) => {
+                    const link = e.target.closest('.crumb-link');
+                    if (link) {
+                        const page = link.dataset.page;
+                        if (page) Sidebar.navigate(page);
+                    }
+                });
+
+                dom.sidebarOverlay.addEventListener('click', () => Sidebar.close());
+            }
+
+            // ============================================================
+            // RESPONSIVIDADE
+            // ============================================================
+            function handleResize() {
+                const mobile = window.innerWidth <= 768;
+                state.isMobile = mobile;
+                if (!mobile) {
+                    Sidebar.close();
+                    dom.sidebar.classList.remove('closed');
+                    dom.main.classList.remove('expanded');
+                } else {
+                    dom.sidebar.classList.remove('closed');
+                }
+            }
+
+            // ============================================================
+            // HISTÓRICO
+            // ============================================================
+            function initHistory() {
+                window.addEventListener('popstate', (e) => {
+                    const page = e.state?.page || window.location.hash.replace('#', '') || CONFIG.defaultPage;
+                    if (page && page !== state.currentPage) {
+                        Sidebar.setActive(page);
+                        PageLoader.load(page);
+                    }
+                });
+            }
+
+            // ============================================================
+            // INICIALIZAÇÃO
+            // ============================================================
+            function init() {
+                const savedSettings = Storage.getSettings();
+                if (savedSettings) state.settings = savedSettings;
+                else { state.settings = { theme: CONFIG.defaultTheme };
+                    Storage.saveSettings(state.settings); }
+
+                ThemeSystem.init();
+                Confirmation._initEvents();
+                Sidebar.init();
+                initHeaderEvents();
+                GlobalSearch.init();
+                AutoSave.init();
+                initHistory();
+                handleResize();
+                window.addEventListener('resize', handleResize);
+
+                state.currentPage = window.location.hash.replace('#', '') || CONFIG.defaultPage;
+                window.HubAPI = HubAPI;
+
+                setTimeout(() => {
+                    Notifications.info('Bem-vindo ao Game Dev Hub v2.0 🚀', 3000);
+                }, 500);
+
+                console.log('🏗️ Game Dev Hub v2.0 inicializado');
+                console.log('📦 Versão:', CONFIG.version);
+                console.log('🎨 Tema:', ThemeSystem.current);
+                console.log('📄 Página atual:', state.currentPage);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+
+        })();
+    </script>
+</body>
+</html>
