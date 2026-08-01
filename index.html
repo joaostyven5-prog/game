@@ -656,7 +656,7 @@
             'use strict';
 
             // ============================================================
-            // CONFIG
+            // CONFIG — SIDEBAR SIMPLIFICADA
             // ============================================================
             const CONFIG = {
                 version: '2.0.0',
@@ -671,31 +671,9 @@
                     group: 'Geral',
                     items: [
                         { id: 'overview', label: 'Overview', icon: 'fa-gauge-high' },
-                        { id: 'historia', label: 'História', icon: 'fa-book' },
                         { id: 'personagens', label: 'Personagens', icon: 'fa-users' },
                         { id: 'cidade', label: 'Cidade', icon: 'fa-city' },
-                        { id: 'lugares', label: 'Lugares', icon: 'fa-location-dot' },
-                        { id: 'timeline', label: 'Linha do Tempo', icon: 'fa-timeline' },
-                        { id: 'anomalia', label: 'Anomalia', icon: 'fa-triangle-exclamation' }
-                    ]
-                }, {
-                    group: 'Desenvolvimento',
-                    items: [
-                        { id: 'capitulos', label: 'Capítulos', icon: 'fa-book-open' },
-                        { id: 'mecanicas', label: 'Mecânicas', icon: 'fa-gear' },
-                        { id: 'minijogos', label: 'Minijogos', icon: 'fa-gamepad' },
-                        { id: 'objetos', label: 'Objetos', icon: 'fa-cube' },
-                        { id: 'artes', label: 'Artes', icon: 'fa-palette' },
-                        { id: 'interface', label: 'Interface', icon: 'fa-display' },
-                        { id: 'programacao', label: 'Programação', icon: 'fa-code' }
-                    ]
-                }, {
-                    group: 'Gestão',
-                    items: [
-                        { id: 'tarefas', label: 'Tarefas', icon: 'fa-list-check' },
-                        { id: 'inspiracoes', label: 'Inspirações', icon: 'fa-lightbulb' },
-                        { id: 'mural', label: 'Mural', icon: 'fa-notes-sticky' },
-                        { id: 'referencias', label: 'Referências', icon: 'fa-bookmark' }
+                        { id: 'artes', label: 'Artes', icon: 'fa-palette' }
                     ]
                 }]
             };
@@ -1054,11 +1032,8 @@
                         history.pushState({ page: pageId }, '', '#' + pageId);
                     }
 
-                    // Carregar no iframe
                     const url = CONFIG.pagesBase + pageId + '.html';
                     dom.pageFrame.src = url;
-
-                    // Mostrar loading (opcional) — o iframe já tem seu próprio carregamento
                 },
 
                 _getPageLabel(id) {
